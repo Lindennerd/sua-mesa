@@ -10,7 +10,11 @@ db.connect();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
 var dishRouter = require('./routes/dish');
+var drinkRouter = require('./routes/drink');
+var employeeRouter = require('./routes/employee');
+var tableRouter = require('./routes/tableRouter');
 
 var app = express();
 
@@ -32,6 +36,9 @@ app.use('/jquery', express.static(path.join(__dirname, 'node_modules/jquery/dist
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/dish', dishRouter);
+app.use('/drink', drinkRouter);
+app.use('/employee', employeeRouter);
+app.use('/table', tableRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
