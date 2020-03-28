@@ -1,0 +1,43 @@
+<form action="/dish" method="POST" name="new-dish" enctype="application/json">
+    <legend>Adicionar Prato</legend>
+    <div>
+        <label for="name">Nome do Prato</label>
+        <input type="text" name="name">
+    </div>
+    <div>
+        <label for="price">Preço do Prato (R$)</label>
+        <input type="number" name="price">
+    </div>
+    <div>
+        <label for="category">Categoria</label>
+        <input type="text" name="category">
+    </div>
+    <div>
+        <label for="tags">Etiquetas</label>
+        <input type="text" name="tags">
+    </div>
+
+    <input type="submit" value="Enviar">
+</form>
+
+<h3>Lista de Pratos</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Categoria</th>
+            <th>Etiquetas</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each dishes}}
+        <tr>
+            <td>{{name}}</td>
+            <td>R$ {{price}}</td>
+            <td>{{category}}</td>
+            <td>{{tags}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
