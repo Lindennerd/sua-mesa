@@ -1,27 +1,5 @@
 var dishModel = require('../repository/models/dish.model');
+var genericController = require('./generic.controller');
 
-module.exports = (function() {
-    return {
-        getAll: function () {
-            return dishModel.find({}, function(err, dishes){
-                if(err) throw err;
-
-                return dishes;
-            });
-        },
-
-        getById: function(id) {
-            return dishModel.findById(id, function(err, dish){
-                if(err) throw err;
-                return dish;
-            })
-        },
-
-        create: async function(dish) {
-            return dishModel.create(dish)
-                .then(function(result){ return result; })
-                .catch(function(err) {throw err; });
-        }
-    }
-
-})();
+var controller = genericController(dishModel);
+module.exports = controller;

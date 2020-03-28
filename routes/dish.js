@@ -15,8 +15,6 @@ router.get('/', async function(req, res, next) {
             .catch(function(err) { throw err; })
         : dishController.getAll()
             .then(function(dishes) {
-                console.log(dishes);
-
                 res.format({
                     'text/html': function() { res.render('dish', {dishes: dishes}); },
                     'application/json': function() { res.send(dishes); }
