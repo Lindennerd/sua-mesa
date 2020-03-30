@@ -1,11 +1,11 @@
 var express = require('express');
-var dishController = require('../controllers/dish.controller');
+var dishFacade = require('../facade/dish.facade');
 
 var router = express.Router();
 
 router.get('/', async function(req, res, next) {
     req.param && req.param.id
-        ? dishController.getById(req.param.id)
+        ? dishFacade.getById(req.param.id)
             .then(function(dish) {
                 res.format({
                     'text/html': function() { res.render('dish', dish); },
@@ -13,11 +13,11 @@ router.get('/', async function(req, res, next) {
                 });
             })
             .catch(function(err) { throw err; })
-        : dishController.getAll()
-            .then(function(dishes) {
+        : dishFacade.getAll()
+            .then(function(items) {
                 res.format({
-                    'text/html': function() { res.render('dish', {dishes: dishes}); },
-                    'application/json': function() { res.send(dishes); }
+                    'text/html': function() { res.render('dish', items); },
+                    'application/json': function() { res.send(items); }
                 });
             })
             .catch(function(err) { throw err; });
@@ -25,13 +25,10 @@ router.get('/', async function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     if(!req.body) res.status(401);
-    else {
-        dishController.create(req.body)
+    else {6
+        dishFacade.create(req.body)
             .then(function(dish) {
-                res.format({
-                    'text/html': function() { res.render('dish', dish); },
-                    'application/json': function() { res.send(dish); }
-                });
+                res.redirect('/dish');
             });
     }
 });

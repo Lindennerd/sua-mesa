@@ -1,11 +1,11 @@
 var express = require('express');
-var drinkController = require('../controllers/drink.controller');
+var drinkFacade = require('../facade/drink.facade');
 
 var router = express.Router();
 
 router.get('/', async function(req, res, next) {
     req.param && req.param.id
-        ? drinkController.getById(req.param.id)
+        ? drinkFacade.getById(req.param.id)
             .then(function(drink) {
                 res.format({
                     'text/html': function() { res.render('drink', drink); },
@@ -13,7 +13,7 @@ router.get('/', async function(req, res, next) {
                 });
             })
             .catch(function(err) { throw err; })
-        : drinkController.getAll()
+        : drinkFacade.getAll()
             .then(function(drinks) {
                 res.format({
                     'text/html': function() { res.render('drink', {drinks: drinks}); },
@@ -26,7 +26,7 @@ router.get('/', async function(req, res, next) {
 router.post('/', function(req, res, next) {
     if(!req.body) res.status(401);
     else {
-        drinkController.create(req.body)
+        drinkFacade.create(req.body)
             .then(function(drink) {
                 res.format({
                     'text/html': function() { res.render('drink', drink); },

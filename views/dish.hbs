@@ -1,27 +1,27 @@
 <form action="/dish" method="POST" name="new-dish" enctype="application/json">
     <legend>Adicionar Prato</legend>
-    <div>
+    <div class="form-group">
         <label for="name">Nome do Prato</label>
-        <input type="text" name="name">
+        <input type="text" name="name" class="form-control">
     </div>
-    <div>
+    <div class="form-group">
         <label for="price">Preço do Prato (R$)</label>
-        <input type="number" name="price">
+        <input type="number" name="price" placeholder="1.00" step="0.01" min="0" class="form-control">
     </div>
-    <div>
+    <div class="form-group">
         <label for="category">Categoria</label>
-        <input type="text" name="category">
+        <input type="text" name="category" class="form-control" list="categories">
     </div>
-    <div>
+    <div class="form-group">
         <label for="tags">Etiquetas</label>
-        <input type="text" name="tags">
+        <input type="text" name="tags" class="form-control" list="tags">
     </div>
 
-    <input type="submit" value="Enviar">
+    <input type="submit" value="Enviar" class="btn btn-primary">
 </form>
 
 <h3>Lista de Pratos</h3>
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>Nome</th>
@@ -41,3 +41,17 @@
         {{/each}}
     </tbody>
 </table>
+
+<datalist id="categories">
+    {{#each categories}}
+        <option>{{.}}</option>
+    {{/each}}
+</datalist>
+
+<datalist id="tags">
+    {{#each tags}}
+        <option>{{.}}</option>
+    {{/each}}
+</datalist>
+
+<script src="/javascripts/dish.js"></script>

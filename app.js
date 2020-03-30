@@ -8,13 +8,13 @@ var db = require('./repository/database');
 
 db.connect();
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./routes/index.route');
+var usersRouter = require('./routes/users.route');
 
-var dishRouter = require('./routes/dish');
-var drinkRouter = require('./routes/drink');
-var employeeRouter = require('./routes/employee');
-var tableRouter = require('./routes/tableRouter');
+var dishRouter = require('./routes/dish.route');
+var drinkRouter = require('./routes/drink.route');
+var employeeRouter = require('./routes/employee.route');
+var tableRouter = require('./routes/table.route');
 
 var app = express();
 
