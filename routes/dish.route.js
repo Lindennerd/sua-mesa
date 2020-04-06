@@ -25,12 +25,39 @@ router.get('/', async function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     if(!req.body) res.status(401);
-    else {6
+    else {
         dishFacade.create(req.body)
             .then(function(dish) {
                 res.redirect('/dish');
+            })
+            .catch(function(err) {
+                res.status(500).render('error', err);
             });
     }
+});
+
+router.get('/update/:id', function(req, res, next) {
+    if(!req.params || !req.params.id) res.status(401).render('error');
+    else {
+        dishFacade.getById(req.params.id)
+            .then(function(dish){ res.render('dish', dish); })
+            .catch(function(error) { res.render('error', error); })
+    }
+})
+
+router.post('/update', function(req, res, next) {
+    if(!req.body) res.status(401);
+    else {
+        dishFacade.update(req.body)
+            .then(dish => res.redirect('/dish'));
+    }
+});
+
+router.delete('/:id', function(req, res, next) {
+    if(!req.params || req.params.id) res.status(401);
+    dishFacade.delete(req.params.id)
+        .then(resp => res.status(200).send())
+        .catch(err => res.status(500).send(err));
 });
 
 module.exports = router;

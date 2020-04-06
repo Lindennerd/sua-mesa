@@ -2,11 +2,6 @@ var dishController = require('../controllers/dish.controller');
 
 module.exports = (function() {
     return {
-        create: function(dish){
-            dish.tags = dish.tags.split(';');
-            return dishController.create(dish);
-        },
-
         getAll: function() {
             return dishController.getAll().then(function(dishes) {
                 var tags = [];
@@ -29,6 +24,19 @@ module.exports = (function() {
                 return dish;
             })
             .catch(function(err) { throw err; });
+        },
+
+        create: function(dish){
+            dish.tags = dish.tags.split(';');
+            return dishController.create(dish);
+        },
+
+        update: function(dish) {
+            return dishController.update(dish);
+        },
+
+        delete: function(dishId) {
+            return dishController.delete(dishId);
         }
     }
 })();

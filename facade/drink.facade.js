@@ -2,22 +2,17 @@ var drinkController = require('../controllers/drink.controller');
 
 module.exports = (function() {
     return {
-        create: function(drink){
-            drink.tags = drink.tags.split(';');
-            return drinkController.create(drink);
-        },
-
         getAll: function() {
-            return drinkController.getAll().then(function(drinkes) {
+            return drinkController.getAll().then(function(drinks) {
                 var tags = [];
 
-                for(var index in dishes) {
-                    tags = tags.concat(dishes[index].tags);
+                for(var index in drinks) {
+                    tags = tags.concat(drinks[index].tags);
                 }
 
                 return {
-                    drinkes: drinkes,
-                    categories: [...new Set(drinkes.map(drink => drink.category))],
+                    drinkes: drinks,
+                    categories: [...new Set(drinks.map(drink => drink.category))],
                     tags: [...new Set(tags.map(tag => tag))]
                 };
             })
@@ -29,6 +24,19 @@ module.exports = (function() {
                 return drink;
             })
             .catch(function(err) { throw err; });
+        },
+
+        create: function(drink){
+            drink.tags = drink.tags.split(';');
+            return drinkController.create(drink);
+        },
+
+        update: function(drink) {
+            return drinkController.update(drink);
+        },
+
+        delete: function(drink) {
+            return drinkController.delete(drink);
         }
     }
 })();

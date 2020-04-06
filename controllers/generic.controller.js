@@ -19,6 +19,18 @@ module.exports = function(model) {
             return model.create(modelToCreate)
                 .then(function(item){ return item; })
                 .catch(function(err) {throw err; });
+        },
+
+        update: async function(modelToUpdate) {
+            return model.save(modelToUpdate)
+                .then(function(item){ return item; })
+                .catch(function(err) {throw err; });
+        },
+
+        delete: async function(idToDelete) {
+            return model.deleteOne({_id: idToDelete})
+                .then(function(item){ return item; })
+                .catch(function(err) {throw err; });
         }
     }
 

@@ -1,20 +1,23 @@
-<form action="/dish" method="POST" name="new-dish" enctype="application/json">
+<form {{#if _id}} action="/dish/update" {{else}} action="/dish" {{/if}} method="POST" name="new-dish" enctype="application/json">
     <legend>Adicionar Prato</legend>
+    {{#if _id}}
+        <input type="text" name="_id" value="{{_id}}" hidden>
+    {{/if}}
     <div class="form-group">
         <label for="name">Nome do Prato</label>
-        <input type="text" name="name" class="form-control">
+        <input type="text" name="name" class="form-control" required value="{{name}}">
     </div>
     <div class="form-group">
         <label for="price">Preço do Prato (R$)</label>
-        <input type="number" name="price" placeholder="1.00" step="0.01" min="0" class="form-control">
+        <input type="number" name="price" placeholder="1.00" step="0.01" min="0" class="form-control" required value="{{price}}">
     </div>
     <div class="form-group">
         <label for="category">Categoria</label>
-        <input type="text" name="category" class="form-control" list="categories">
+        <input type="text" name="category" class="form-control" list="categories" required value="{{category}}">
     </div>
     <div class="form-group">
         <label for="tags">Etiquetas</label>
-        <input type="text" name="tags" class="form-control" list="tags">
+        <input type="text" name="tags" class="form-control" list="tags" required value="{{tags}}">
     </div>
 
     <input type="submit" value="Enviar" class="btn btn-primary">
@@ -28,15 +31,19 @@
             <th>Preço</th>
             <th>Categoria</th>
             <th>Etiquetas</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         {{#each dishes}}
-        <tr>
+        <tr data-dish="{{.}}">
             <td>{{name}}</td>
             <td>R$ {{price}}</td>
             <td>{{category}}</td>
             <td>{{tags}}</td>
+            <td><a href="/dish/update/{{_id}}">Editar</a></td>
+            <td><a href="" class="delete-dish" data-id="{{_id}}">Excluir</a></td>
         </tr>
         {{/each}}
     </tbody>
