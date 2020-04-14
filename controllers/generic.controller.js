@@ -22,7 +22,7 @@ module.exports = function(model) {
         },
 
         update: async function(modelToUpdate) {
-            return model.save(modelToUpdate)
+            return model.updateOne(modelToUpdate)
                 .then(function(item){ return item; })
                 .catch(function(err) {throw err; });
         },
